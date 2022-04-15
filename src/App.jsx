@@ -3,11 +3,13 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+
 
 import React, { useEffect, useState } from 'react'
 
 import superagent from 'superagent'
-
+require('./app.css');
 function App() {
   const [id, setId] = useState('25')
   const [pok, setPok] = useState([])
@@ -28,14 +30,22 @@ function App() {
     getPok()
   }, [id])
   return (
-    < >
-      <h1>Please enter the Pokemon Id(seperate by ,)</h1>
-      <input type="text" value={id} onChange={event => { setId(event.target.value) }} />
+    <>
+      <h3>Please enter the Pokemon Id(seperate by ,)</h3>
+      <TextField
+          required
+          id="outlined-required"
+          label="Enter Here"
+          defaultValue={id}
+          onChange={event => { setId(event.target.value) }}
+        />
+      <div className='all'>
+      
       {pok.map(pokemon => {
-        return (<Card sx={{ maxWidth: 450 }}>
+        return (<Card sx={{ maxWidth: 550 }}>
           <CardMedia
             component="img"
-            height="200"
+            height="350"
             image={pokemon.sprites}
             alt="pic"
           />
@@ -49,6 +59,7 @@ function App() {
           </CardContent>
         </Card>)
       })}
+      </div>
     </>
   );
 }
